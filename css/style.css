@@ -1,0 +1,13 @@
+.content {
+  max-width: 20em;
+  margin: auto;
+  box-shadow: 0 0 1em black;
+  padding: 1em;
+}
+.task {
+  margin: 0.5em 0;
+  cursor:
+}
+.complete {
+  text-decoration: line-through;
+}

@@ -1,11 +1,20 @@
 // SAMPLE DATA SET
-let tasks = [
-  { id: 0, name: `Write a "print" function`, complete: false },
-  { id: 1, name: `Add new tasks`, complete: false },
-  { id: 2, name: `Complete/checking tasks`, complete: false },
-  { id: 3, name: `Store the tasks somewhere`, complete: false },
-];
+// let tasks = [
+//   { id: 0, name: `Write a "print" function`, complete: false },
+//   { id: 1, name: `Add new tasks`, complete: false },
+//   { id: 2, name: `Complete/checking tasks`, complete: false },
+//   { id: 3, name: `Store the tasks somewhere`, complete: false },
+// ];
 
+// LOAD FROM BROWSER STORAGE -OR- START A BLANK TASKS ARRAY
+// Remember that || means "OR"
+// So here, if "tasks" exists in localStorage, use that
+// otherwise ("or"), start with a blank Array of tasks: []
+// https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+// The JSON.parse is because objects can't be stored into localStorage
+// So we convert it to a string of text using this format
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
+let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
 
 // DOCUMENT ELEMENTS TO CHANGE
@@ -86,6 +95,14 @@ function printAllTasks() {
   // Ternary format:
   //    ( trueOrFalseVariableOrCondition ) ? 'condition was true!' : 'condition was false!'
   // These can go right into our template evaluation blocks: ${ }
+
+
+  // The JSON.stringify is because objects can't be stored into localStorage
+  // So we convert it to a string of text using this format
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+  // Clear out localStorage:
+  // localStorage.removeItem('tasks'); 
 }
 
 

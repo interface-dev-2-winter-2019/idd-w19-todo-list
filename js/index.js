@@ -11,6 +11,9 @@ let tasks = [
 // DOCUMENT ELEMENTS TO CHANGE
 const allTasks = document.getElementById('alltasks');  // our list of tasks (ol)
 const theTaskForm = document.getElementById('newtask');  // our new task input
+const showAllTasks = document.getElementById('filterAll');  // our new task input
+const justComplete = document.getElementById('filterDone');  // our new task input
+const justTodo = document.getElementById('filterTodo');  // our new task input
 
 
 
@@ -29,7 +32,7 @@ theTaskForm.addEventListener('submit', event => {
   theTaskForm.task.value = '';
 
   // Reprint the new list
-  printAllTasks();
+  printSomeTasks();
 
   // prevent the submit from leaving the page
   event.preventDefault(); 
@@ -55,7 +58,7 @@ allTasks.addEventListener('click', event => {
     })
 
     // Reprint the whole list again to reflect the new changes to our dataset
-    printAllTasks();
+    printSomeTasks();
   }
 
   /* **NOTE**: In general, it's considered _"bad practice"_ to modify datasets in multiple places
@@ -67,11 +70,25 @@ allTasks.addEventListener('click', event => {
 });
 
 
+// FILTER THE LIST
+// Use three buttons to filter the list
+showAllTasks.addEventListener('click', event => {
+  printSomeTasks();
+});
+justComplete.addEventListener('click', event => {
+  printSomeTasks(tasks.filter(t => t.complete));
+});
+justTodo.addEventListener('click', event => {
+  printSomeTasks(tasks.filter(t => !t.complete));
+});
+
 
 // OUTPUT THE RESULTS
-function printAllTasks() {
+// Create a local variable called "tasksToPrint", if the function was called
+// without an array of tasks, just use the big master "tasks" array
+function printSomeTasks(tasksToPrint = tasks) {
   // "map()" runs once for each Object in the Array
-  allTasks.innerHTML = tasks.map(oneTask => 
+  allTasks.innerHTML = tasksToPrint.map(oneTask => 
     `<li class="task${  (oneTask.complete) ? ' complete' : ''  }">
       <label>
         <input type="checkbox"
@@ -92,4 +109,4 @@ function printAllTasks() {
 
 // START THE APPLICATION
 // Pring the task list for the first time
-printAllTasks();
+printSomeTasks();

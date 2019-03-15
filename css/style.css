@@ -11,3 +11,6 @@
 .complete {
   text-decoration: line-through;
 }
+.filters > li {
+  display: inline-block;
+}
